@@ -28,6 +28,9 @@ int main() {
         else if(opcao ==3){
             listarTarefas(lt);
         }
+        else if(opcao ==4){
+            alterarTarefa(&lt);
+        }
         else{
             printf("Opcao nao existe\n");
         }

@@ -47,6 +47,9 @@ fgets(novatarefa.categoria, sizeof(novatarefa.categoria), stdin);
         printf("Qual a prioridade(de 0 a 10): \n");
         scanf("%d",&novatarefa.prioridade);
     }
+    printf("Qual o andamento da tarefa (1: completa, 2: em andamento, 3: nao inciado)? \n");
+    fflush(stdin);
+    scanf("%d", &novatarefa.estado);
 
     //
 
@@ -92,8 +95,82 @@ int deletarTarefa(ListaDeTarefas *lt){
     return 0;
     //
 }
+int alterarTarefa(ListaDeTarefas *lt) {
+    //Inicializacao da variavel do pedido do usuario
+    int resposta;
+
+    printf("Qual tarefa deseja alterar? ");
+    scanf("%d", &resposta);
+    // Check para ver se o valor eh valido
+    if (resposta >= 0 && resposta < lt->qtd) {
+        int escolha;
+        do {
+            //Bloco de repeticao em formato do - while para uso continuo ate o usuario desejar sair
+            printf("O que deseja alterar na tarefa %d?\n", resposta);
+            printf("1. Categoria\n");
+            printf("2. Descricao\n");
+            printf("3. Prioridade\n");
+            printf("4. Andamento\n");
+            printf("5. Concluir\n");
+            fflush(stdin);
+            scanf("%d", &escolha);
+
+            switch (escolha) {
+                // Cases para as escolhas que o usuario pode tomar
+                case 1:
+                    printf("Digite a nova categoria: ");
+                    fflush(stdin);
+                    scanf("%s", lt->tarefas[resposta].categoria);
+                    break;
+                case 2:
+                    printf("Digite a nova descricao: ");
+                    fflush(stdin);
+                    scanf("%s", lt->tarefas[resposta].descricao);
+                    break;
+                case 3:
+                    do {
+                        int novaPrioridade = -1;
+                        printf("Digite a nova prioridade (entre 0 e 10): ");
+                        if (scanf("%d", &novaPrioridade) == 1 && novaPrioridade >= 0 && novaPrioridade <= 10) {
+                            lt->tarefas[resposta].prioridade = novaPrioridade;
+                            break; // Se a prioridade for válida, saia do loop
+                        } else {
+                            printf("Prioridade inválida. Deve ser um número entre 0 e 10.\n");
+                        }
+                    } while (1); // Loop infinito, sairá apenas quando a prioridade for válida
+                    break;
+                case 4:
+                    do{
+                        int novoandamento;
+                        printf("Digite o novo andamento (completa, nao iniciada, em andamento)\n");
+                        if( scanf("%d", &novoandamento) == 1 && novoandamento == 1|| novoandamento == 2|| novoandamento ==3){
+                            lt->tarefas[resposta].estado = novoandamento;
+                            break;
+                        }
+                        else {
+                            printf("Estado invalido, digite 1 para tarefa completa, 2 para tarefa em andamento e 3 para nao iniciada");
+                        }
+
+                    } while(1);
+
+                    break;
+                case 5:
+                    printf("Alteracoes concluidas.\n");
+                    break;
+                default:
+                    printf("Opcao invalida.\n");
+            }
+        } while (escolha != 5); // Codigo de saida do do - while eh 4
+    } else {
+        printf("Numero de tarefa invalido. Nenhuma alteracao foi feita.\n");
+    }
+
+    return 1;
+}
+
 int listarTarefas(ListaDeTarefas lt){
     int i = 0;
+    printf("%d", lt.qtd);
 
     // Mensagem para o usuário
     printf("Tarefas cadastradas: \n");
@@ -106,6 +183,15 @@ int listarTarefas(ListaDeTarefas lt){
         printf("Categoria: %s\n", lt.tarefas[i].categoria);
         printf("Descricao: %s\n", lt.tarefas[i].descricao);
         printf("Prioridade: %d\n", lt.tarefas[i].prioridade);
+        if(lt.tarefas[i].estado == 1){
+            printf("Estado: Completa");
+        }
+        else if(lt.tarefas[i].estado == 2){
+            printf("Estado: Em andamento");
+        }
+        else if(lt.tarefas[i].estado == 3){
+            printf("Estado: Nao iniciada");
+        }
 
         i++;
     }
