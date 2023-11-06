@@ -1,6 +1,7 @@
 #include "proj.h"
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 
 int criarTarefa(ListaDeTarefas *lt){
@@ -170,8 +171,8 @@ int alterarTarefa(ListaDeTarefas *lt) {
 }
 
 int listarTarefas(ListaDeTarefas lt){
-    int prioridadeescolhida, estadoescolhido;
-    char categoriaescolhida[300];
+    int prioridadeescolhida, estadoescolhido, prioridadecategoria;
+    char categoriaescolhida[300], categoriaprioridade[300];
     int i = 0;
     int escolha;
     printf("Deseja listar as tarefas com qual filtro?\n");
@@ -263,6 +264,41 @@ switch (escolha){
             }
         }}
         break;
+    case 4:
+        printf("Digite a categoria das tarefas que deseja ver: ");
+        scanf("%s", categoriaprioridade);
+
+        int tarefasEncontradas = 0; // Variável para contar as tarefas encontradas
+
+        for (i = 0; i < lt.qtd; i++) {
+            printf("Categoria da tarefa %d: %s\n", i, lt.tarefas[i].categoria);
+            printf("Categoria a buscar: %s\n", categoriaprioridade);
+
+            if (strcasecmp(lt.tarefas[i].categoria, categoriaprioridade) == 0) {
+                printf("-----------------------\n");
+                printf("Numero da Tarefa: %d\n", i);
+                printf("Categoria: %s\n", lt.tarefas[i].categoria);
+                printf("Descricao: %s\n", lt.tarefas[i].descricao);
+                printf("Prioridade: %d\n", lt.tarefas[i].prioridade);
+
+                if (lt.tarefas[i].estado == 1) {
+                    printf("Estado: Completa\n");
+                } else if (lt.tarefas[i].estado == 2) {
+                    printf("Estado: Em andamento\n");
+                } else if (lt.tarefas[i].estado == 3) {
+                    printf("Estado: Nao iniciada\n");
+                }
+
+                tarefasEncontradas++; // Incrementa o contador de tarefas encontradas
+            }
+        }
+
+        // Verifica se nenhuma tarefa foi encontrada
+        if (tarefasEncontradas == 0) {
+            printf("Nenhuma tarefa encontrada com a categoria especificada.\n");
+        }
+        break;
+
 
 
 
