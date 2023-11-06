@@ -1,5 +1,6 @@
 #include "proj.h"
 #include <stdio.h>
+#include <string.h>
 
 
 int criarTarefa(ListaDeTarefas *lt){
@@ -169,32 +170,131 @@ int alterarTarefa(ListaDeTarefas *lt) {
 }
 
 int listarTarefas(ListaDeTarefas lt){
+    int prioridadeescolhida, estadoescolhido;
+    char categoriaescolhida[300];
     int i = 0;
-    printf("%d", lt.qtd);
+    int escolha;
+    printf("Deseja listar as tarefas com qual filtro?\n");
+    printf("1 para mostrar as tarefas com a prioridade escolhida. \n");
+    printf("2 para mostrar as tarefas com o estado escolhido. \n");
+    printf("3 para mostrar as tarefas por a categoria escolhida. \n");
+    printf("4 para mostrar as tarefas pela categoria escolhida e em ordem decrescente de prioridade. \n");
+    scanf("%d", &escolha);
+switch (escolha){
+    case 1:
+        printf("Digite a prioridade (0-10) que deve ser listada: ");
+        scanf("%d", &prioridadeescolhida);
+        while(i<lt.qtd){
+            if(lt.tarefas[i].prioridade == prioridadeescolhida){
+                printf("-----------------------\n");
+                printf("Numero da Tarefa: %d\n", i);
+                printf("Categoria: %s\n", lt.tarefas[i].categoria);
+                printf("Descricao: %s\n", lt.tarefas[i].descricao);
+                printf("Prioridade: %d\n", lt.tarefas[i].prioridade);
+                if(lt.tarefas[i].estado == 1){
+                    printf("Estado: Completa\n");
+                }
+                else if(lt.tarefas[i].estado == 2){
+                    printf("Estado: Em andamento\n");
+                }
+                else if(lt.tarefas[i].estado == 3){
+                    printf("Estado: Nao iniciada\n");
+                }
 
-    // Mensagem para o usuário
-    printf("Tarefas cadastradas: \n");
-    //
+            }
+            i++;
+        }
+        break;
+    case 2:
+        printf("Digite o estado a ser procurado nas tarefas (1,2 ou 3): ");
+        scanf("%d", &estadoescolhido);
+        while(i<lt.qtd){
+            if(lt.tarefas[i].estado == estadoescolhido){
+                printf("-----------------------\n");
+                printf("Numero da Tarefa: %d\n", i);
+                printf("Categoria: %s\n", lt.tarefas[i].categoria);
+                printf("Descricao: %s\n", lt.tarefas[i].descricao);
+                printf("Prioridade: %d\n", lt.tarefas[i].prioridade);
+                if(lt.tarefas[i].estado == 1){
+                    printf("Estado: Completa\n");
+                }
+                else if(lt.tarefas[i].estado == 2){
+                    printf("Estado: Em andamento\n");
+                }
+                else if(lt.tarefas[i].estado == 3){
+                    printf("Estado: Nao iniciada\n");
+                }
 
-    //Loop de repetição para leitura de cada Tarefa dentro da ListaDeTarefas no endereço lt
-    while (i<lt.qtd){
-        printf("-----------------------\n");
-        printf("Numero da Tarefa: %d\n", i);
-        printf("Categoria: %s\n", lt.tarefas[i].categoria);
-        printf("Descricao: %s\n", lt.tarefas[i].descricao);
-        printf("Prioridade: %d\n", lt.tarefas[i].prioridade);
-        if(lt.tarefas[i].estado == 1){
-            printf("Estado: Completa");
+            }
+            i++;
         }
-        else if(lt.tarefas[i].estado == 2){
-            printf("Estado: Em andamento");
-        }
-        else if(lt.tarefas[i].estado == 3){
-            printf("Estado: Nao iniciada");
-        }
+        break;
+//    case 3:
+//        printf("Digite a categoria a ser procurada:");
+//        scanf("%s", categoriaescolhida);
+//        printf("%s", categoriaescolhida);
+//        // Ordenar as tarefas por prioridade em ordem decrescente
+//        for (int j = 0; j < lt.qtd - 1; j++) {
+//            for (int k = j + 1; k < lt.qtd; k++) {
+//                if (lt.tarefas[j].prioridade < lt.tarefas[k].prioridade) {
+//                    // Troca as tarefas se a prioridade for maior
+//                    Tarefa temp = lt.tarefas[j];
+//                    lt.tarefas[j] = lt.tarefas[k];
+//                    lt.tarefas[k] = temp;
+//                }
+//            }
+//        }
 
-        i++;
-    }
+        // Exibir as tarefas ordenadas
+        for (i = 0; i < lt.qtd; i++) {
+            if(strcmp(lt.tarefas[i].categoria, categoriaescolhida) ==0){
+            printf("-----------------------\n");
+            printf("Numero da Tarefa: %d\n", i);
+            printf("Categoria: %s\n", lt.tarefas[i].categoria);
+            printf("Descricao: %s\n", lt.tarefas[i].descricao);
+            printf("Prioridade: %d\n", lt.tarefas[i].prioridade);
+
+            if (lt.tarefas[i].estado == 1) {
+                printf("Estado: Completa\n");
+            } else if (lt.tarefas[i].estado == 2) {
+                printf("Estado: Em andamento\n");
+            } else if (lt.tarefas[i].estado == 3) {
+                printf("Estado: Nao iniciada\n");
+            }
+        }}
+        break;
+
+
+
+    default:
+        // Código para opção inválida
+        printf("Opcao invalida. Tente novamente (1 a 4)\n");
+        break;
+}
+
+//    // Mensagem para o usuário
+//    printf("Tarefas cadastradas: \n");
+//    //
+//
+//    //Loop de repetição para leitura de cada Tarefa dentro da ListaDeTarefas no endereço lt
+//    while (i<lt.qtd){
+//        printf("-----------------------\n");
+//        printf("Numero da Tarefa: %d\n", i);
+//        printf("Categoria: %s\n", lt.tarefas[i].categoria);
+//        printf("Descricao: %s\n", lt.tarefas[i].descricao);
+//        printf("Prioridade: %d\n", lt.tarefas[i].prioridade);
+//        if(lt.tarefas[i].estado == 1){
+//            printf("Estado: Completa\n");
+//        }
+//        else if(lt.tarefas[i].estado == 2){
+//            printf("Estado: Em andamento\n");
+//        }
+//        else if(lt.tarefas[i].estado == 3){
+//            printf("Estado: Nao iniciada\n");
+//        }
+//
+//        i++;
+//    }
     //
 
     // Indicação de Sucesso
