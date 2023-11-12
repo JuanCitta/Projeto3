@@ -318,6 +318,7 @@ void printMenu(){
     printf("2. Deletar Tarefa\n ");
     printf("3. Listar Tarefas\n ");
     printf("4. Alterar Tarefas\n");
+    printf("5. Exportar Tarefas\n");
 
 }
 int salvarLista(ListaDeTarefas lt, char nome[]){
@@ -389,19 +390,20 @@ int exportarTarefa(ListaDeTarefas *lt) {
     printf("2. Por Categoria\n");
     printf("3. Por Ambos\n");
     scanf("%d", &escolha);
-
+    //Evitando o caracter nulo de ser considerado como uma escolha
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 
 
     switch (escolha) {
         case 1:
+            //Input pedido
             printf("Digite a Prioridade que deseja: \n");
             scanf("%d", &prioridade);
             strcpy(nomeArquivo, "Tarefas_Por_Prioridade.txt"); // Usando strcpy para alterar o nome do arquivo gerado
 
             arquivo = fopen(nomeArquivo, "w");
-
+            // Colando as informacoes filtradas no arquivo
             for (int i = 0; i < lt->qtd; i++) {
                 if (lt->tarefas[i].prioridade == prioridade) {
                     fprintf(arquivo, "Prioridade: %d; Categoria: %s; Estado: %d; Descricao: %s;\n", lt->tarefas[i].prioridade, lt->tarefas[i].categoria, lt->tarefas[i].estado, lt->tarefas[i].descricao);
@@ -430,7 +432,7 @@ int exportarTarefa(ListaDeTarefas *lt) {
             fclose(arquivo);
             break;
 
-            break;
+
         case 3:
             //Removendo quebra de linha de Input do formato String
             printf("Digite a Categoria que deseja: \n");
@@ -458,10 +460,10 @@ int exportarTarefa(ListaDeTarefas *lt) {
 
     return 0;
 }
-
+//Funcao criada para nao ter problemas na hora de comparar strings
 void removerQuebrasDeLinha(char *str) {
     size_t length = strlen(str);
     if (length > 0 && str[length - 1] == '\n') {
-        str[length - 1] = '\0';  // Substitui a quebra de linha por terminador nulo
+        str[length - 1] = '\0';  // Substitui a quebra de linha por nada
     }
 }
