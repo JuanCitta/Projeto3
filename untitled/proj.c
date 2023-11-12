@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 
 int criarTarefa(ListaDeTarefas *lt){
@@ -50,7 +51,6 @@ fgets(novatarefa.categoria, sizeof(novatarefa.categoria), stdin);
         scanf("%d",&novatarefa.prioridade);
     }
     printf("Qual o andamento da tarefa (1: completa, 2: em andamento, 3: nao inciado)? \n");
-    fflush(stdin);
     scanf("%d", &novatarefa.estado);
 
     //
@@ -171,9 +171,10 @@ int alterarTarefa(ListaDeTarefas *lt) {
 }
 
 int listarTarefas(ListaDeTarefas lt){
-    int prioridadeescolhida, estadoescolhido, prioridadecategoria;
+    int prioridadeescolhida, estadoescolhido, prioridadecategoria, tamanho=5;
     char categoriaescolhida[300], categoriaprioridade[300];
     int i = 0;
+    Tarefa tarefa;
     int escolha;
     printf("Deseja listar as tarefas com qual filtro?\n");
     printf("1 para mostrar as tarefas com a prioridade escolhida. \n");
@@ -181,6 +182,7 @@ int listarTarefas(ListaDeTarefas lt){
     printf("3 para mostrar as tarefas por a categoria escolhida. \n");
     printf("4 para mostrar as tarefas pela categoria escolhida e em ordem decrescente de prioridade. \n");
     scanf("%d", &escolha);
+    while (getchar() != '\n');
 switch (escolha){
     case 1:
         printf("Digite a prioridade (0-10) que deve ser listada: ");
@@ -230,50 +232,44 @@ switch (escolha){
             i++;
         }
         break;
-//    case 3:
-//        printf("Digite a categoria a ser procurada:");
-//        scanf("%s", categoriaescolhida);
-//        printf("%s", categoriaescolhida);
-//        // Ordenar as tarefas por prioridade em ordem decrescente
-//        for (int j = 0; j < lt.qtd - 1; j++) {
-//            for (int k = j + 1; k < lt.qtd; k++) {
-//                if (lt.tarefas[j].prioridade < lt.tarefas[k].prioridade) {
-//                    // Troca as tarefas se a prioridade for maior
-//                    Tarefa temp = lt.tarefas[j];
-//                    lt.tarefas[j] = lt.tarefas[k];
-//                    lt.tarefas[k] = temp;
-//                }
-//            }
-//        }
+
+    case 3:
+        // Get the category input
+        printf("Digite a categoria a ser procurada:");
+        fgets(categoriaescolhida, sizeof(categoriaescolhida), stdin);
+
+        // Ordenar as tarefas por prioridade em ordem decrescente
+        qsort(lt.tarefas, lt.qtd, sizeof(Tarefa), comparaTarefas);
 
         // Exibir as tarefas ordenadas
         for (i = 0; i < lt.qtd; i++) {
-            if(strcmp(lt.tarefas[i].categoria, categoriaescolhida) ==0){
-            printf("-----------------------\n");
-            printf("Numero da Tarefa: %d\n", i);
-            printf("Categoria: %s\n", lt.tarefas[i].categoria);
-            printf("Descricao: %s\n", lt.tarefas[i].descricao);
-            printf("Prioridade: %d\n", lt.tarefas[i].prioridade);
+            if (strcmp(lt.tarefas[i].categoria, categoriaescolhida) == 0) {
+                printf("-----------------------\n");
+                printf("Numero da Tarefa: %d\n", i);
+                printf("Categoria: %s\n", lt.tarefas[i].categoria);
+                printf("Descricao: %s\n", lt.tarefas[i].descricao);
+                printf("Prioridade: %d\n", lt.tarefas[i].prioridade);
 
-            if (lt.tarefas[i].estado == 1) {
-                printf("Estado: Completa\n");
-            } else if (lt.tarefas[i].estado == 2) {
-                printf("Estado: Em andamento\n");
-            } else if (lt.tarefas[i].estado == 3) {
-                printf("Estado: Nao iniciada\n");
+                if (lt.tarefas[i].estado == 1) {
+                    printf("Estado: Completa\n");
+                    printf("-----------------------\n");
+                } else if (lt.tarefas[i].estado == 2) {
+                    printf("Estado: Em andamento\n");
+                    printf("-----------------------\n");
+                } else if (lt.tarefas[i].estado == 3) {
+                    printf("Estado: Nao iniciada\n");
+                    printf("-----------------------\n");
+                }
             }
-        }}
+        }
         break;
+
     case 4:
         printf("Digite a categoria das tarefas que deseja ver: ");
-        fgets(categoriaprioridade, sizeof(categoriaprioridade), stdin);
         fgets(categoriaprioridade, sizeof(categoriaprioridade), stdin);
         int tarefasEncontradas = 0; // Variável para contar as tarefas encontradas
 
         for (i = 0; i < lt.qtd; i++) {
-            printf("Categoria da tarefa %d: %s\n", i, lt.tarefas[i].categoria);
-            printf("Categoria a buscar: %s\n", categoriaprioridade);
-
             if (strcasecmp(lt.tarefas[i].categoria, categoriaprioridade) == 0) {
                 printf("-----------------------\n");
                 printf("Numero da Tarefa: %d\n", i);
@@ -283,10 +279,13 @@ switch (escolha){
 
                 if (lt.tarefas[i].estado == 1) {
                     printf("Estado: Completa\n");
+                    printf("-----------------------\n");
                 } else if (lt.tarefas[i].estado == 2) {
                     printf("Estado: Em andamento\n");
+                    printf("-----------------------\n");
                 } else if (lt.tarefas[i].estado == 3) {
                     printf("Estado: Nao iniciada\n");
+                    printf("-----------------------\n");
                 }
 
                 tarefasEncontradas++; // Incrementa o contador de tarefas encontradas
@@ -299,39 +298,13 @@ switch (escolha){
         }
         break;
 
-
-
-
     default:
         // Código para opção inválida
         printf("Opcao invalida. Tente novamente (1 a 4)\n");
         break;
 }
 
-//    // Mensagem para o usuário
-//    printf("Tarefas cadastradas: \n");
-//    //
-//
-//    //Loop de repetição para leitura de cada Tarefa dentro da ListaDeTarefas no endereço lt
-//    while (i<lt.qtd){
-//        printf("-----------------------\n");
-//        printf("Numero da Tarefa: %d\n", i);
-//        printf("Categoria: %s\n", lt.tarefas[i].categoria);
-//        printf("Descricao: %s\n", lt.tarefas[i].descricao);
-//        printf("Prioridade: %d\n", lt.tarefas[i].prioridade);
-//        if(lt.tarefas[i].estado == 1){
-//            printf("Estado: Completa\n");
-//        }
-//        else if(lt.tarefas[i].estado == 2){
-//            printf("Estado: Em andamento\n");
-//        }
-//        else if(lt.tarefas[i].estado == 3){
-//            printf("Estado: Nao iniciada\n");
-//        }
-//
-//        i++;
-//    }
-    //
+
 
     // Indicação de Sucesso
     return 0;
@@ -343,6 +316,7 @@ void printMenu(){
     printf("1. Criar Tarefa\n ");
     printf("2. Deletar Tarefa\n ");
     printf("3. Listar Tarefas\n ");
+    printf("4. Alterar Tarefas\n");
 
 }
 int salvarLista(ListaDeTarefas lt, char nome[]){
@@ -386,3 +360,18 @@ int carregarLista(ListaDeTarefas *lt,char nome[]){
     // Indicação de Sucesso
     return 0;}
     //
+
+
+    // Funcao para usar no qsort
+int comparaTarefas(const void* a, const void* b) {
+    const Tarefa* tarefaA = (const Tarefa*)a;
+    const Tarefa* tarefaB = (const Tarefa*)b;
+    // Com tarefaA e tarefaB apontando para uma posicao no struct tarefas, compara
+    // as entradas de prioridade de cada um
+        if(tarefaA->prioridade> tarefaB->prioridade)
+            return -1;
+        else if (tarefaA->prioridade< tarefaB->prioridade)
+            return 1;
+        else
+            return 0;
+}
