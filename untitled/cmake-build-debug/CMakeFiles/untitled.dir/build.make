@@ -43,19 +43,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2023.2\bin\cmake\win\x64\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2023.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled"
+CMAKE_SOURCE_DIR = C:\Users\citta\Documents\GitHub\Projeto3\untitled
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\cmake-build-debug"
+CMAKE_BINARY_DIR = C:\Users\citta\Documents\GitHub\Projeto3\untitled\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/untitled.dir/depend.make
@@ -69,32 +69,32 @@ include CMakeFiles/untitled.dir/progress.make
 include CMakeFiles/untitled.dir/flags.make
 
 CMakeFiles/untitled.dir/main.c.obj: CMakeFiles/untitled.dir/flags.make
-CMakeFiles/untitled.dir/main.c.obj: C:/Users/Predator\ Helios/Downloads/Projeto/untitled/untitled/main.c
+CMakeFiles/untitled.dir/main.c.obj: C:/Users/citta/Documents/GitHub/Projeto3/untitled/main.c
 CMakeFiles/untitled.dir/main.c.obj: CMakeFiles/untitled.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/untitled.dir/main.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled.dir/main.c.obj -MF CMakeFiles\untitled.dir\main.c.obj.d -o CMakeFiles\untitled.dir\main.c.obj -c "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\main.c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\citta\Documents\GitHub\Projeto3\untitled\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/untitled.dir/main.c.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled.dir/main.c.obj -MF CMakeFiles\untitled.dir\main.c.obj.d -o CMakeFiles\untitled.dir\main.c.obj -c C:\Users\citta\Documents\GitHub\Projeto3\untitled\main.c
 
 CMakeFiles/untitled.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/untitled.dir/main.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\main.c" > CMakeFiles\untitled.dir\main.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\citta\Documents\GitHub\Projeto3\untitled\main.c > CMakeFiles\untitled.dir\main.c.i
 
 CMakeFiles/untitled.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/untitled.dir/main.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\main.c" -o CMakeFiles\untitled.dir\main.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\citta\Documents\GitHub\Projeto3\untitled\main.c -o CMakeFiles\untitled.dir\main.c.s
 
 CMakeFiles/untitled.dir/proj.c.obj: CMakeFiles/untitled.dir/flags.make
-CMakeFiles/untitled.dir/proj.c.obj: C:/Users/Predator\ Helios/Downloads/Projeto/untitled/untitled/proj.c
+CMakeFiles/untitled.dir/proj.c.obj: C:/Users/citta/Documents/GitHub/Projeto3/untitled/proj.c
 CMakeFiles/untitled.dir/proj.c.obj: CMakeFiles/untitled.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/untitled.dir/proj.c.obj"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled.dir/proj.c.obj -MF CMakeFiles\untitled.dir\proj.c.obj.d -o CMakeFiles\untitled.dir\proj.c.obj -c "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\proj.c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\citta\Documents\GitHub\Projeto3\untitled\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/untitled.dir/proj.c.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/untitled.dir/proj.c.obj -MF CMakeFiles\untitled.dir\proj.c.obj.d -o CMakeFiles\untitled.dir\proj.c.obj -c C:\Users\citta\Documents\GitHub\Projeto3\untitled\proj.c
 
 CMakeFiles/untitled.dir/proj.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/untitled.dir/proj.c.i"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\proj.c" > CMakeFiles\untitled.dir\proj.c.i
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\citta\Documents\GitHub\Projeto3\untitled\proj.c > CMakeFiles\untitled.dir\proj.c.i
 
 CMakeFiles/untitled.dir/proj.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/untitled.dir/proj.c.s"
-	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\proj.c" -o CMakeFiles\untitled.dir\proj.c.s
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\citta\Documents\GitHub\Projeto3\untitled\proj.c -o CMakeFiles\untitled.dir\proj.c.s
 
 # Object files for target untitled
 untitled_OBJECTS = \
@@ -110,7 +110,7 @@ untitled.exe: CMakeFiles/untitled.dir/build.make
 untitled.exe: CMakeFiles/untitled.dir/linkLibs.rsp
 untitled.exe: CMakeFiles/untitled.dir/objects1.rsp
 untitled.exe: CMakeFiles/untitled.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable untitled.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\citta\Documents\GitHub\Projeto3\untitled\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable untitled.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\untitled.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -122,6 +122,6 @@ CMakeFiles/untitled.dir/clean:
 .PHONY : CMakeFiles/untitled.dir/clean
 
 CMakeFiles/untitled.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled" "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled" "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\cmake-build-debug" "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\cmake-build-debug" "C:\Users\Predator Helios\Downloads\Projeto\untitled\untitled\cmake-build-debug\CMakeFiles\untitled.dir\DependInfo.cmake" --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\citta\Documents\GitHub\Projeto3\untitled C:\Users\citta\Documents\GitHub\Projeto3\untitled C:\Users\citta\Documents\GitHub\Projeto3\untitled\cmake-build-debug C:\Users\citta\Documents\GitHub\Projeto3\untitled\cmake-build-debug C:\Users\citta\Documents\GitHub\Projeto3\untitled\cmake-build-debug\CMakeFiles\untitled.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/untitled.dir/depend
 

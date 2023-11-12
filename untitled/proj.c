@@ -40,10 +40,12 @@ fgets(novatarefa.categoria, sizeof(novatarefa.categoria), stdin);
     // Pedindo Categoria, Descrição e Prioriade ao usuário
     printf("Escreva a categoria da tarefa (ate 300 caracteres):\n");
     fgets(novatarefa.categoria, sizeof(novatarefa.categoria), stdin);
+    removerQuebrasDeLinha(novatarefa.categoria);
 
 
     printf("Descreva sua tarefa (ate 300 caracteres):\n");
     fgets(novatarefa.descricao, sizeof(novatarefa.descricao), stdin);
+    removerQuebrasDeLinha(novatarefa.descricao);
 
     while(novatarefa.prioridade>10 || novatarefa.prioridade<0){
 
@@ -114,19 +116,16 @@ int alterarTarefa(ListaDeTarefas *lt) {
             printf("3. Prioridade\n");
             printf("4. Andamento\n");
             printf("5. Concluir\n");
-            fflush(stdin);
             scanf("%d", &escolha);
 
             switch (escolha) {
                 // Cases para as escolhas que o usuario pode tomar
                 case 1:
                     printf("Digite a nova categoria: ");
-                    fflush(stdin);
                     scanf("%s", lt->tarefas[resposta].categoria);
                     break;
                 case 2:
                     printf("Digite a nova descricao: ");
-                    fflush(stdin);
                     scanf("%s", lt->tarefas[resposta].descricao);
                     break;
                 case 3:
@@ -182,6 +181,7 @@ int listarTarefas(ListaDeTarefas lt){
     printf("3 para mostrar as tarefas por a categoria escolhida. \n");
     printf("4 para mostrar as tarefas pela categoria escolhida e em ordem decrescente de prioridade. \n");
     scanf("%d", &escolha);
+    //Nao aceitando caracter vazio como escolha
     while (getchar() != '\n');
 switch (escolha){
     case 1:
@@ -234,9 +234,10 @@ switch (escolha){
         break;
 
     case 3:
-        // Get the category input
+        // Input do usuario
         printf("Digite a categoria a ser procurada:");
         fgets(categoriaescolhida, sizeof(categoriaescolhida), stdin);
+        removerQuebrasDeLinha(categoriaescolhida);
 
         // Ordenar as tarefas por prioridade em ordem decrescente
         qsort(lt.tarefas, lt.qtd, sizeof(Tarefa), comparaTarefas);
@@ -374,4 +375,93 @@ int comparaTarefas(const void* a, const void* b) {
             return 1;
         else
             return 0;
+}
+int exportarTarefa(ListaDeTarefas *lt) {
+    int escolha;
+    int prioridade;
+    char categoria[300];
+    char nomeArquivo[100];
+
+    FILE *arquivo;
+
+    printf("Como deseja exportar os arquivos: \n");
+    printf("1. Por Prioridade\n");
+    printf("2. Por Categoria\n");
+    printf("3. Por Ambos\n");
+    scanf("%d", &escolha);
+
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+
+
+    switch (escolha) {
+        case 1:
+            printf("Digite a Prioridade que deseja: \n");
+            scanf("%d", &prioridade);
+            strcpy(nomeArquivo, "Tarefas_Por_Prioridade.txt"); // Usando strcpy para alterar o nome do arquivo gerado
+
+            arquivo = fopen(nomeArquivo, "w");
+
+            for (int i = 0; i < lt->qtd; i++) {
+                if (lt->tarefas[i].prioridade == prioridade) {
+                    fprintf(arquivo, "Prioridade: %d; Categoria: %s; Estado: %d; Descricao: %s;\n", lt->tarefas[i].prioridade, lt->tarefas[i].categoria, lt->tarefas[i].estado, lt->tarefas[i].descricao);
+                }
+            }
+
+            fclose(arquivo);
+            break;
+
+        case 2:
+            printf("Digite a Categoria que deseja: \n");
+            fgets(categoria,sizeof (categoria),stdin);
+            removerQuebrasDeLinha(categoria);
+
+            strcpy(nomeArquivo, "Tarefas_Por_Categoria.txt");
+
+            arquivo = fopen(nomeArquivo, "w");
+            // Ordenar as tarefas por prioridade em ordem decrescente
+            qsort(lt->tarefas, lt->qtd, sizeof(Tarefa), comparaTarefas);
+            for (int i = 0; i < lt->qtd; i++) {
+                if (strcmp(lt->tarefas[i].categoria, categoria) == 0) {
+                    fprintf(arquivo, "Prioridade: %d; Categoria: %s; Estado: %d; Descricao: %s;\n", lt->tarefas[i].prioridade, lt->tarefas[i].categoria, lt->tarefas[i].estado, lt->tarefas[i].descricao);
+                }
+            }
+
+            fclose(arquivo);
+            break;
+
+            break;
+        case 3:
+            //Removendo quebra de linha de Input do formato String
+            printf("Digite a Categoria que deseja: \n");
+            fgets(categoria,sizeof (categoria),stdin);
+            removerQuebrasDeLinha(categoria);
+            printf("Digite a Prioridade que deseja: \n");
+            scanf("%d", &prioridade);
+            //Abrindo e nomeando o arquivo com strcpy e fopen
+            strcpy(nomeArquivo, "Tarefas_Por_Categoria_E_Prioridade.txt");
+            arquivo = fopen(nomeArquivo, "w");
+               // Ordenar as tarefas por prioridade em ordem decrescente
+             qsort(lt->tarefas, lt->qtd, sizeof(Tarefa), comparaTarefas);
+              //Loop para o preenchimento do arquivo com as informacoes
+              for (int i = 0; i < lt->qtd; i++) {
+                   if (strcmp(lt->tarefas[i].categoria, categoria) == 0 && lt->tarefas[i].prioridade == prioridade) {
+                       fprintf(arquivo, "Prioridade: %d; Categoria: %s; Estado: %d; Descricao: %s;\n", lt->tarefas[i].prioridade, lt->tarefas[i].categoria, lt->tarefas[i].estado, lt->tarefas[i].descricao);
+                   }
+               }
+              break;
+
+        default:
+            printf("Opcao invalida.\n");
+            return 1;
+    }
+
+    return 0;
+}
+
+void removerQuebrasDeLinha(char *str) {
+    size_t length = strlen(str);
+    if (length > 0 && str[length - 1] == '\n') {
+        str[length - 1] = '\0';  // Substitui a quebra de linha por terminador nulo
+    }
 }

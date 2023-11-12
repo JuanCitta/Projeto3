@@ -1,0 +1,2 @@
+Prioridade: 10; Categoria: juan; Estado: 3; Descricao: manuel;
+Prioridade: 7; Categoria: juan; Estado: 2; Descricao: bola;
