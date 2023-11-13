@@ -268,6 +268,7 @@ switch (escolha){
     case 4:
         printf("Digite a categoria das tarefas que deseja ver: ");
         fgets(categoriaprioridade, sizeof(categoriaprioridade), stdin);
+        removerQuebrasDeLinha(categoriaprioridade);
         int tarefasEncontradas = 0; // Variável para contar as tarefas encontradas
 
         for (i = 0; i < lt.qtd; i++) {
